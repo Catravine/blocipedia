@@ -1,2 +1,40 @@
-<h1>Blocipedia</h1>
-<p>This is the home page for Blocipedia</p>
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-md-8">
+      <h1>Blocipedia <span style="color: #09f;" class="glyphicon glyphicon-pencil" aria-hidden="true"></span></h1>
+      <p>SaaS Wiki Collaboration</p>
+      <% if !(user_signed_in?) %>
+        <p><%= link_to "Sign In", new_user_session_path, class: 'btn btn-primary' %>
+        and Wiki it up, or Sign up!</p>
+      <% end %>
+    </div>
+    <div class="col-md-4">
+      <% if user_signed_in? %>
+        <h2><%= link_to 'Hi, user!', '#' %>:</h2>
+        <p>some index page signin content for this user</p>
+      <% else %>
+        <%= render "signup" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <h2>Create <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></h2>
+    <p>Share your knowledge with the world!  Public Wikis
+      can be created, edited, read or used in homework
+      assignments... Anything goes!</p>
+  </div>
+  <div class="col-md-4">
+    <h2>Collaborate <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span></h2>
+    <p>Use Markdown syntax... that's fancy-tech-talk for putting
+      asterices and whatnot around words to boldify them guys
+      and whatnot.</p>
+  </div>
+  <div class="col-md-4">
+    <h2>Congratulate <span class="glyphicon glyphicon-usd" aria-hidden="true"></span></h2>
+    <p>Go Premium -better than free because it costs more- You decide who
+      drinks from your golden fountain of wisdom.</p>
+  </div>
+</div>
