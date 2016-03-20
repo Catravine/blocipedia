@@ -20,11 +20,11 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     :address => "smtp.gmail.com",
     :port => 587,
-    :domain => "gmail.com"
-    :authentication => :login,
-    :enable_starttls_auto => true,
+    :domain => "gmail.com",
     :user_name => "ccblocipedia@gmail.com",
-    :password => "helloworld16"
+    :password => "helloworld16",
+    :authentication => :plain,
+    :enable_starttls_auto => true
   }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
