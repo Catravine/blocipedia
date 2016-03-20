@@ -32,3 +32,4 @@ gem 'jquery-rails'
 gem 'turbolinks'
 # Devise for user authentication
 gem 'devise'
+gem 'bcrypt-ruby'
