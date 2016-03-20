@@ -16,6 +16,12 @@ Rails.application.configure do
 
   # Host (heroku) for mailer in production
   config.action_mailer.default_url_options = { host: 'http://immense-mountain-59850.herokuapp.com/' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address => "127.0.0.1",
+    :port    => 25,
+    :domain  => 'yourdomain.com'
+  }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
