@@ -15,14 +15,14 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
   # Host (heroku) for mailer in production
-  config.action_mailer.default_url_options = { host: 'http://immense-mountain-59850.herokuapp.com/' }
+  config.action_mailer.default_url_options = { host: 'https://immense-mountain-59850.herokuapp.com/' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :tls => true,
     :address => "smtp.gmail.com",
     :port => 587,
-    :domain => "gmail.com",
+    :domain => "gmail.com"
     :authentication => :login,
+    :enable_starttls_auto => true,
     :user_name => "ccblocipedia@gmail.com",
     :password => "helloworld16"
   }
