@@ -9,8 +9,6 @@ class AddConfirmableToDevise < ActiveRecord::Migration
     # User.reset_column_information # Need for some types of updates, but not for update_all.
     # To avoid a short time window between running the migration and updating all existing
     # users as confirmed, do the following
-    # CC - just used today's date so will hopefully work in both
-    # postgres (heroku) and sqlite3 for development.
     execute("UPDATE users SET confirmed_at = NOW()")
     # All existing user accounts should be able to log in after this.
     # Remind: Rails using SQLite as default. And SQLite has no such function :NOW.

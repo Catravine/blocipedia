@@ -18,9 +18,13 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'http://immense-mountain-59850.herokuapp.com/' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address => "127.0.0.1",
-    :port    => 25,
-    :domain  => 'yourdomain.com'
+    :tls => true,
+    :address => "smtp.gmail.com",
+    :port => 587,
+    :domain => "gmail.com",
+    :authentication => :login,
+    :user_name => "ccblocipedia@gmail.com",
+    :password => "helloworld16"
   }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
