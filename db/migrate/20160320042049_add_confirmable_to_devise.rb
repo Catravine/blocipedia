@@ -11,7 +11,7 @@ class AddConfirmableToDevise < ActiveRecord::Migration
     # users as confirmed, do the following
     # CC - just used today's date so will hopefully work in both
     # postgres (heroku) and sqlite3 for development.
-    execute("UPDATE users SET confirmed_at = 2016-03-20")
+    execute("UPDATE users SET confirmed_at = NOW()")
     # All existing user accounts should be able to log in after this.
     # Remind: Rails using SQLite as default. And SQLite has no such function :NOW.
     # Use :date('now') instead of :NOW when using SQLite.
