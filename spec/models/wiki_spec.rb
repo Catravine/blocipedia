@@ -16,7 +16,7 @@ RSpec.describe Wiki, type: :model do
     end
 
     it "responds to private" do
-      expect(my_wiki).to respond_to(:private)
+      expect(my_wiki).to respond_to(:public)
     end
   end
 

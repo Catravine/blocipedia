@@ -29,6 +29,7 @@ class WikisController < ApplicationController
 
   def update
     @wiki = Wiki.find(params[:id])
+
     @wiki.assign_attributes(wiki_params)
 
     if @wiki.save
@@ -54,7 +55,7 @@ class WikisController < ApplicationController
   private
 
   def wiki_params
-    params.require(:wiki).permit(:title, :body, :private)
+    params.require(:wiki).permit(:title, :body, :public)
   end
 
 end

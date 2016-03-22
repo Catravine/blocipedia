@@ -142,24 +142,25 @@ RSpec.describe WikisController, type: :controller do
     end
 
     describe "PUT #update" do
-      # it "updates post with expected attributes" do
-      #   new_title = "New Title"
-      #   new_body = "New Body"
-      #   new_private = false
-      #   patch :update, {id: my_wiki.id}, post: {title: new_title, body: new_body, private: new_private}
-      #   updated_wiki = assigns(:wiki)
-      #   expect(updated_wiki.id).to eq my_wiki.id
-      #   expect(updated_wiki.title).to eq new_title
-      #   expect(updated_wiki.body).to eq new_body
-      # end
-      #
-      # it "redirects to the updated wiki" do
-      #   new_title = "Brand New Title"
-      #   new_body = "Brand New Body"
-      #   new_private = true
-      #   put :update, id: my_wiki.id, post: {title: new_title, body: new_body, private: new_private}
-      #   expect(response).to redirect_to my_wiki
-      # end
+      it "updates wiki with expected attributes" do
+        new_title = "New Wiki Part 1"
+        new_body = "New Wiki Body 1"
+
+        put :update, id: my_wiki.id, wiki: {title: new_title, body: new_body}
+
+        updated_wiki = assigns(:wiki)
+        expect(updated_wiki.id).to eq my_wiki.id
+        expect(updated_wiki.title).to eq new_title
+        expect(updated_wiki.body).to eq new_body
+      end
+
+      it "redirects to the updated wiki" do
+        new_title = "New Wiki Part 2"
+        new_body = "New Wiki Body 2"
+
+        put :update, id: my_wiki.id, wiki: {title: new_title, body: new_body}
+        expect(response).to redirect_to my_wiki
+      end
     end
 
     describe "DELETE #destroy" do
