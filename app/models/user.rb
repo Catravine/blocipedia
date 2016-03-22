@@ -6,4 +6,6 @@ class User < ActiveRecord::Base
          :confirmable
 
   has_many :wikis
+
+  enum role: [:standard, :premium, :admin]
 end

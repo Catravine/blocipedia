@@ -146,7 +146,7 @@ RSpec.describe WikisController, type: :controller do
         new_title = "New Wiki Part 1"
         new_body = "New Wiki Body 1"
 
-        put :update, id: my_wiki.id, wiki: {title: new_title, body: new_body}
+        put :update, id: my_wiki.id, wiki: {title: new_title, body: new_body }
 
         updated_wiki = assigns(:wiki)
         expect(updated_wiki.id).to eq my_wiki.id

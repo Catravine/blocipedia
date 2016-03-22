@@ -1,4 +1,7 @@
 class WikisController < ApplicationController
+
+  skip_before_filter :autheticate_user!, only: [:index, :show]
+
   def index
     @wikis = Wiki.all
   end
@@ -29,7 +32,7 @@ class WikisController < ApplicationController
 
   def update
     @wiki = Wiki.find(params[:id])
-
+    authorize @wiki
     @wiki.assign_attributes(wiki_params)
 
     if @wiki.save
@@ -43,6 +46,7 @@ class WikisController < ApplicationController
 
   def destroy
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
     if @wiki.destroy
       flash[:notice] = "\"#{@wiki.title}\" was deleted successfully."
       redirect_to wikis_path

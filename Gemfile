@@ -33,3 +33,5 @@ gem 'turbolinks'
 # Devise for user authentication
 gem 'devise'
 gem 'bcrypt-ruby'
+# Pundit for authorization of different privilages
+gem 'pundit'

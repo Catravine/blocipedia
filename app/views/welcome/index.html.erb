@@ -12,6 +12,7 @@
       <% if user_signed_in? %>
         <h2><%= link_to 'Hi, user!', '#' %>:</h2>
         <p>some index page signin content for this user</p>
+        <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>
       <% else %>
         <%= render "signup" %>
       <% end %>

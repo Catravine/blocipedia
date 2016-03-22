@@ -2,7 +2,9 @@
 
 <div class="row">
   <div class="col-md-8">
-    <p>by: <%= @wiki.user.email %></p>
+    <p>by: <%= @wiki.user.email %> |
+      <% if @wiki.public %>Public<% else %>Private<% end %>
+    </p>
     <p><%= @wiki.body %></p>
   </div>
   <div class="col-md-4">
