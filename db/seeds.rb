@@ -26,6 +26,14 @@ catravine = User.create!(
 )
 catravine.premium!
 
+# Create a main standard user
+User.create!(
+  email: "peebles@poobles.com",
+  password: "helloworld",
+  password_confirmation: "helloworld",
+  confirmed_at: Date.today
+)
+
 # Total Users
 users = User.all
 
