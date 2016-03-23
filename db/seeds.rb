@@ -1,4 +1,4 @@
-# Create Users
+# Create random standard Users
 10.times do
   User.create!(
     email: Faker::Internet.email,
