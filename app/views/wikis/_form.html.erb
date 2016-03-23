@@ -3,8 +3,11 @@
     <p>Share your knowledge:</p>
     <ul>
       <li>Get as elaborate as you like</li>
-      <li>Upgrade to 'premium' to be able to make
-        private wikis, but don't be a knowledge-hoarder!</li>
+      <li>Upgrade to Premium to be able to make Private Wikis.</li>
+      <li>Public Wikis can be edited by anyone, but only its owner
+          (if they are a premium user) may change its 'public' setting.</li>
+      <li>Private Wikis can be edited by the owner or any other user the
+        owner designates.</li>
     </ul>
   </div>
   <div class="col-md-8">
@@ -17,11 +20,13 @@
         <%= f.label :body %>
         <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki body" %>
       </div>
-      <div class="form-group">
-        <%= f.label :public, class: 'checkbox' do %>
-          <%= f.check_box :public %> Public wiki
-        <% end %>
-      </div>
+      <% if @wiki.user == current_user || params[:action] == 'new' %>
+        <div class="form-group">
+          <%= f.label :public, class: 'checkbox' do %>
+            <%= f.check_box :public %> Public wiki
+          <% end %>
+        </div>
+      <% end %>
       <div class="form-group">
         <%= f.submit "Save", class: 'btn btn-success' %>
       </div>

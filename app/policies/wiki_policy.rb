@@ -7,10 +7,10 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def update?
-    wiki.public?
+    wiki.public? || wiki.user ==  user
   end
 
   def destroy?
-    wiki.public?
+    wiki.public? || wiki.user ==  user
   end
 end
