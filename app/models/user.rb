@@ -8,4 +8,9 @@ class User < ActiveRecord::Base
   has_many :wikis
 
   enum role: [:standard, :premium, :admin]
+
+  def downgrade
+    self.standard!
+  end
+
 end
