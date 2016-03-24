@@ -37,3 +37,5 @@ gem 'bcrypt-ruby'
 gem 'pundit'
 # Charge for premium accounts
 gem 'stripe'
+# Figaro for envirnment variables
+gem 'figaro', '1.0'

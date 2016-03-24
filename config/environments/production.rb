@@ -21,8 +21,8 @@ Rails.application.configure do
     :address => "smtp.gmail.com",
     :port => 587,
     :domain => "gmail.com",
-    :user_name => "ccblocipedia@gmail.com",
-    :password => "helloworld16",
+    user_name: ENV['blocipedia_email'],
+    password: ENV['blocipedia_email_password'],
     :authentication => :plain,
     :enable_starttls_auto => true
   }

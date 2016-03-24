@@ -1,0 +1,9 @@
+# Stripe Keys:
+stripe_test_secret_key:
+stripe_test_publishable_key:
+stripe_live_secret_key:
+stripe_live_publishable_key:
+
+# Blocipedia Email credentials
+blocipedia_email:
+blocipedia_email_password: 
