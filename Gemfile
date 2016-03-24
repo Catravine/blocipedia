@@ -15,7 +15,7 @@ end
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'shoulda'
-  gem 'faker'
+  #gem 'faker'
   gem 'factory_girl_rails', '~> 4.0'
 end
 
@@ -39,3 +39,5 @@ gem 'pundit'
 gem 'stripe'
 # Figaro for envirnment variables
 gem 'figaro', '1.0'
+# Faker to also seed the Production
+gem 'faker'
