@@ -2,10 +2,11 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:my_user) { create(:user) }
+
   it { should have_many(:wikis) }
 
   describe "attributes" do
-    it "should responsd to email" do
+    it "should respond to email" do
       expect(my_user).to respond_to(:email)
     end
 
@@ -29,6 +30,20 @@ RSpec.describe User, type: :model do
   describe "roles" do
     it "is standard by default" do
       expect(my_user.role).to eql("standard")
+    end
+  end
+
+  describe "#downgrade!" do
+    before do
+      @premium_user = create(:user, role: 'premium')
+      5.times { @premium_user.wikis.create(public: false) }
+    end
+
+    it 'downgrades the user' do
+      expect(@premium_user.wikis.where(public: false).count).to eql(5)
+      @premium_user.downgrade!
+      expect(@premium_user.wikis.where(public: false).count).to eql(0)
+      expect(@premium_user.role).to eql('standard')
     end
   end
 end
