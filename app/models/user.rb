@@ -9,8 +9,10 @@ class User < ActiveRecord::Base
 
   enum role: [:standard, :premium, :admin]
 
-  def downgrade
-    self.standard!
+  def downgrade!
+    standard!
+    wikis.each { |w| w.update(public: true) }
+    wikis.none? { |w| !w.public? }
   end
 
 end

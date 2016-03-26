@@ -13,13 +13,6 @@
         <h2><%= link_to 'Hi, user!', '#' %>:</h2>
         <p>some index page signin content for this user</p>
         <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>
-        <% if current_user.standard? %>
-          <%= link_to "Upgrade", '/charges/new/', class: 'btn btn-success' %>
-        <% end %>
-        <% if current_user.premium? %>
-          <%= link_to "downgrade", current_user.downgrade, class: 'btn btn-danger',
-            data: {confirm: 'Are you sure? You have already paid!'} %>
-        <% end %>
       <% else %>
         <%= render "signup" %>
       <% end %>

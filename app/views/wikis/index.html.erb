@@ -10,5 +10,13 @@
   </div>
   <div class="col-md-4">
     <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>
+    <% if current_user.standard? %>
+      <%= link_to 'Upgrade Account', '/charges/new/', class: 'btn btn-warning' %>
+    <% end %>
+    <% if current_user.premium? %>
+      <%= link_to 'Downgrade Account', downgrade_account_path, class: 'btn btn-danger',
+        data: {confirm: 'Downgrading your account will end your subscription, and
+          make all your private wikis public.  Are you sure?'} %>
+    <% end %>
   </div>
 </div>

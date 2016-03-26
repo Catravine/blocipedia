@@ -1,6 +1,6 @@
-<h1>Premium Account Charge</h1>
+<h1>Premium Account Upgrade</h1>
 
-<p>Going Premium is a one-time charge of $15 USD.</p>
+<p>Going Premium a monthly subscription of $9.99 US.</p>
 
 <%= form_tag charges_path do %>
   <article>
@@ -10,13 +10,13 @@
       </div>
     <% end %>
     <label class="amount">
-      <span>Amount: $15.00</span>
+      <span>Get started: $9.99</span>
     </label>
   </article>
 
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-description="Blocipedia Premium Account"
-          data-amount="1500"
+          data-description="Blocipedia Premium Subscription"
+          data-amount="999"
           data-locale="auto"></script>
 <% end %>

@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:my_user) { create(:user) }
+  let(:premium_user) { create(:user, role: 'premium') }
+
   it { should have_many(:wikis) }
 
   describe "attributes" do
@@ -29,6 +31,18 @@ RSpec.describe User, type: :model do
   describe "roles" do
     it "is standard by default" do
       expect(my_user.role).to eql("standard")
+    end
+  end
+
+  describe "#downgrade!" do
+    before do
+      5.times { create(:wiki, user: premium_user, public: false) }
+    end
+    it "downgrades the user" do
+      expect(Wiki.where(user: premium_user, public: false).count).to eq 5
+      premium_user.downgrade!
+      expect(premium_user.role).to eq("standard")
+      expect(Wiki.where(user: premium_user, public: false).count).to eq 0
     end
   end
 end
