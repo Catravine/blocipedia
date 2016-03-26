@@ -10,8 +10,11 @@
     </div>
     <div class="col-md-4">
       <% if user_signed_in? %>
-        <h2><%= link_to 'Hi, user!', '#' %>:</h2>
-        <p>some index page signin content for this user</p>
+        <h2>Hi, <%= link_to current_user.name, "/users/#{current_user.id}" %>!</h2>
+        <p>- <%= Wiki.where(user: current_user, public: true).count %>
+           public wikis<% if !(current_user.standard?) %><br/>
+          - <%= Wiki.where(user: current_user, public: false).count %>
+           private wikis<% end %></p>
         <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>
       <% else %>
         <%= render "signup" %>

@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
 
   enum role: [:standard, :premium, :admin]
 
+  def name
+    username = self.email.split(/@/).first.humanize.titleize
+  end
+
   def downgrade!
     standard!
     wikis.each { |w| w.update(public: true) }

@@ -35,8 +35,8 @@ class ChargesController < ApplicationController
     user = current_user
     if user.downgrade!
       flash[:notice] = "Subscription ended, all private wikis now public."
-      customer = Stripe::Customer.retrieve({CUSTOMER_ID})
-      customer.subscriptions.retrieve({SUBSCRIPTION_ID}).delete
+      #customer = Stripe::Customer.retrieve({CUSTOMER_ID})
+      #customer.subscriptions.retrieve({SUBSCRIPTION_ID}).delete
     else
       flash.now[:alert] = "There was an error downgrading.  Please try again."
     end

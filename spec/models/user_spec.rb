@@ -34,6 +34,12 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#name" do
+    it "should return the username part of the email, capitalized" do
+      expect(my_user.name).to eq("Caroline")
+    end
+  end
+
   describe "#downgrade!" do
     before do
       5.times { create(:wiki, user: premium_user, public: false) }
