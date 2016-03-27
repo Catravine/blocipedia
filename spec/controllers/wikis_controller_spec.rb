@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe WikisController, type: :controller do
 
   let(:my_user) { create(:user) }
+  let(:premium_user) { create(:user, role: "premium") }
   let(:my_wiki) { create(:wiki, user: my_user) }
+  let(:private_wiki) { create(:wiki, user: premium_user, public: false) }
 
   context "guest user" do
 
@@ -57,7 +59,7 @@ RSpec.describe WikisController, type: :controller do
     end
   end
 
-  context "signed in user" do
+  context "signed in standard user" do
     before(:each) do
       request.env["HTTP_REFERER"] = "where_i_came_from"
       @request.env["devise.mapping"] = Devise.mappings[:user]
@@ -70,13 +72,18 @@ RSpec.describe WikisController, type: :controller do
         expect(response).to have_http_status(:success)
       end
 
-      it "assigns Wiki.all to @wikis" do
+      it "includes only public wikis in @wikis" do
         get :index
-        expect(assigns(:wikis)).to eq(Wiki.all)
+        expect(assigns(:wikis)).not_to include(private_wiki)
       end
     end
 
     describe "GET #show" do
+      it "redirects from private wikis" do
+        get :show, {id: private_wiki.id}
+        expect(response).to redirect_to(wikis_path)
+      end
+      
       it "returns http success" do
         get :show, id: my_wiki.id
         expect(response).to have_http_status(:success)
@@ -177,5 +184,18 @@ RSpec.describe WikisController, type: :controller do
     end
   end
 
+  context "premium or admin users" do
+    before(:each) do
+      request.env["HTTP_REFERER"] = "where_i_came_from"
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      sign_in premium_user
+    end
 
+    describe "GET #index" do
+      it "assigns Topic.all to topic" do
+        get :index
+        expect(assigns(:wikis)).to eq ([my_wiki, private_wiki])
+      end
+    end
+  end
 end

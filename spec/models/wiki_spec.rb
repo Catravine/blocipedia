@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Wiki, type: :model do
   let(:my_user) { create(:user) }
+  let(:premium_user) { create(:user, role: "premium") }
   let(:my_wiki) { create(:wiki, user: my_user) }
+  let(:private_wiki) { create(:wiki, user: premium_user, public: false) }
 
   it { should belong_to(:user) }
 
@@ -24,4 +26,16 @@ RSpec.describe Wiki, type: :model do
     end
   end
 
+  describe "scopes" do
+
+    describe "visible_to(user)" do
+      it "returns all wikis if user if premium" do
+        expect(Wiki.visible_to(premium_user)).to eq(Wiki.all)
+      end
+
+      it "returns only public wikis for standard users" do
+        expect(Wiki.visible_to(my_user)).to  eq([my_wiki])
+      end
+    end
+  end
 end
