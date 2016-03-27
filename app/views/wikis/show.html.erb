@@ -13,7 +13,7 @@
       <% if @wiki.public %>Public<% else %>Private<% end %>
       <% if @wiki.user == current_user %> - Owner<% end %>
     </p>
-    <p><%= @wiki.body %></p>
+    <p><%= markdown(@wiki.body) %></p>
   </div>
   <div class="col-md-4">
     <% if policy(@wiki).update? %>

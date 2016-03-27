@@ -41,3 +41,5 @@ gem 'stripe'
 gem 'figaro', '1.0'
 # Faker to also seed the Production
 gem 'faker'
+# Redcarpet to allow and parse markdown syntax
+gem 'redcarpet'

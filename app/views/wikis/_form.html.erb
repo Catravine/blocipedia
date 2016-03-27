@@ -21,6 +21,14 @@
       <div class="form-group">
         <%= f.label :body %>
         <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki body" %>
+        <p class="markdown">
+          Blocipedia supports markdown: <b>**bold**</b> <i>_italic_</i> <code>`code`</code> >quote &nbsp;  • - bullet list<br/>
+          text links: [link text](link url)<br/>
+          <small>
+            more about markdown at <a href="https://daringfireball.net/projects/markdown/basics">daringfireball</a>
+            or <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">markdown-here</a>.
+          </small>
+        </p>
       </div>
       <% if current_user.premium? && (@wiki.user == current_user || params[:action] == 'new') %>
         <div class="form-group">
