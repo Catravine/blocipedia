@@ -7,6 +7,7 @@ RSpec.describe Wiki, type: :model do
   let(:private_wiki) { create(:wiki, user: premium_user, public: false) }
 
   it { should belong_to(:user) }
+  it { should have_many(:collaborators) }
 
   describe "attributes" do
     it "responds to title" do

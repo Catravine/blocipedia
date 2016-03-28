@@ -2,8 +2,7 @@
 
 <div class="row">
   <div class="col-md-8">
-    <p>by:
-      <% if @wiki.user.premium? %>
+    <h4><% if @wiki.user.premium? %>
         <span class='glyphicon glyphicon-star' style="color: #fc0;"></span>
       <% end %>
       <% if @wiki.user.admin? %>
@@ -11,9 +10,16 @@
       <% end %>
       <%= @wiki.user.email %> |
       <% if @wiki.public %>Public<% else %>Private<% end %>
-      <% if @wiki.user == current_user %> - Owner<% end %>
-    </p>
-    <p><%= markdown(@wiki.body) %></p>
+      <% if @wiki.user == current_user %> - Owner<% end %></h4>
+      <% if !(Collaborator.where(wiki_id: @wiki.id).empty?) %>
+        <p><strong>Collaborators:</strong>
+          <% Collaborator.where(wiki_id: @wiki.id).each do |collab| %>
+            <%= User.where(id: collab.user_id).pluck(:email) %>
+          <% end %>
+        </p>
+      <% end %>
+      <hr/>
+      <%= markdown(@wiki.body) %>
   </div>
   <div class="col-md-4">
     <% if policy(@wiki).update? %>
