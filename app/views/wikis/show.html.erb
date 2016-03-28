@@ -11,9 +11,9 @@
       <%= @wiki.user.email %> |
       <% if @wiki.public %>Public<% else %>Private<% end %>
       <% if @wiki.user == current_user %> - Owner<% end %></h4>
-      <% if !(Collaborator.where(wiki_id: @wiki.id).empty?) %>
+      <% if !(Collaborator.where(wiki: @wiki).empty?) %>
         <p><strong>Collaborators:</strong>
-          <% Collaborator.where(wiki_id: @wiki.id).each do |collab| %>
+          <% Collaborator.where(wiki: @wiki).each do |collab| %>
             <%= User.where(id: collab.user_id).pluck(:email) %>
           <% end %>
         </p>

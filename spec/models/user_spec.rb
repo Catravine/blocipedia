@@ -4,6 +4,7 @@ RSpec.describe User, type: :model do
   let(:my_user) { create(:user) }
   let(:my_user_2) { create(:user, email: "caroline@example.com") }
   let(:premium_user) { create(:user, role: 'premium') }
+  let(:private_wiki) { create(:wiki, user: premium_user) }
 
   it { should have_many(:wikis) }
   it { should have_many(:collaborators) }
@@ -45,6 +46,7 @@ RSpec.describe User, type: :model do
   describe "#downgrade!" do
     before do
       5.times { create(:wiki, user: premium_user, public: false) }
+      Collaborator.create!(user: my_user, wiki: private_wiki)
     end
 
     it "downgrades the user" do
@@ -52,11 +54,7 @@ RSpec.describe User, type: :model do
       premium_user.downgrade!
       expect(premium_user.role).to eq("standard")
       expect(Wiki.where(user: premium_user, public: false).count).to eq 0
-    end
-
-    it "destroys collaborator associated with private wikis" do
-      pending("destroy the collabs")
-      fail
+      expect(Collaborator.where(user: premium_user).count).to eq 0
     end
   end
 end

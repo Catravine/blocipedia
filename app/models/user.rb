@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
 
   def downgrade!
     standard!
+    Collaborator.where(user_id: id).each { |collab| collab.destroy! }
     wikis.each { |w| w.update(public: true) }
     wikis.none? { |w| !w.public? }
   end
