@@ -18,6 +18,16 @@
         <% if current_user.standard? %><li>upgrade required</li><% end %>
       </ul>
     </div>
+    <% if !(Collaborator.where(user: @user).empty?) %>
+      <div>
+        <h3>Private Collaborations</h3>
+        <ul>
+          <% Collaborator.where(user: @user).each do |collab| %>
+            <li><%= link_to Wiki.where(id: collab.wiki_id).first.title, "/wikis/#{collab.wiki_id}" %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
   </div>
   <div class="col-md-4">
     <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>
