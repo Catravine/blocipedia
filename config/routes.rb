@@ -7,11 +7,11 @@ Rails.application.routes.draw do
   devise_for :users
   match 'users/:id' => 'users#show', via: :get
   resources :user, only: [:show]
-  #devise_for :users, :controllers => { :sessions => 'sessions' }
 
-  # Stripe payment ChargesController
-  resources :charges
-  get 'downgrade_account' => 'charges#downgrade_account'
+  # Stripe payment SubscriptionsController
+  resource :subscription
+  get 'downgrade_account' => 'subscription#downgrade_account'
+  post 'stripe_checkout' => 'subscriptions#stripe_checkout'
 
   get 'about' => 'welcome#about'
   root 'welcome#index'

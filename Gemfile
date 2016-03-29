@@ -36,7 +36,7 @@ gem 'bcrypt-ruby'
 # Pundit for authorization of different privilages
 gem 'pundit'
 # Charge for premium accounts
-gem 'stripe'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 # Figaro for envirnment variables
 gem 'figaro', '1.0'
 # Faker to also seed the Production

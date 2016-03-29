@@ -32,7 +32,7 @@
   <div class="col-md-4">
     <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>
     <% if current_user.standard? %>
-      <%= link_to 'Upgrade Account', '/charges/new/', class: 'btn btn-warning' %>
+      <%= link_to 'Upgrade Account', new_subscription_path, class: 'btn btn-warning' %>
     <% end %>
     <% if current_user.premium? %>
       <%= link_to 'Downgrade Account', downgrade_account_path, class: 'btn btn-danger',
