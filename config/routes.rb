@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   # Stripe payment SubscriptionsController
   resource :subscription
+  resource :card
   get 'downgrade_account' => 'subscription#downgrade_account'
   post 'stripe_checkout' => 'subscriptions#stripe_checkout'
 

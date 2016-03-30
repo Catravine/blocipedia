@@ -1,40 +1,99 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h1>Edit <%= resource_name.to_s.humanize %>: <%= current_user.email %></h1>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+<div class="row">
+  <div class="col-md-4">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true %>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+        <%= f.password_field :password, autocomplete: "off" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+        <%= f.password_field :current_password, autocomplete: "off" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Update" %>
+      </div>
+    <% end %>
   </div>
+  <div class="col-md-4">
+    <h3>Manage Subscription</h3>
+    <% if current_user.standard? %>
+      <%= link_to 'Upgrade Account', new_subscription_path, class: 'btn btn-warning' %>
+    <% end %>
+    <% if current_user.premium? %>
+    <h4>Subscription Details:</h4>
+    <p>Your current card on file is:<br/>
+      <%= current_user.card_type %> ending in '<%= current_user.card_last4 %>'<br/>
+      Expires: <%= current_user.card_exp_month %> / <%= current_user.card_exp_year %>
+    </p>
+    <h4>Update Card</h4>
+    <%= form_tag card_path, method: :put, id: "payment-form" do %>
+      <span class="payment-errors"></span>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+      <div class="form-row">
+        <label>
+          <span>Card Number</span>
+          <input value="4242 4242 4242 4242" type="text" size="20" data-stripe="number"/>
+        </label>
+      </div>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+      <div class="form-row">
+        <label>
+          <span>CVC</span>
+          <input value="123" type="text" size="4" data-stripe="cvc"/>
+        </label>
+      </div>
+
+      <div class="form-row">
+        <label>
+          <span>Expiration (MM/YYYY)</span>
+          <input value="08" type="text" size="2" data-stripe="exp-month"/>
+        </label>
+        <span> / </span>
+        <input value="2019" type="text" size="4" data-stripe="exp-year"/>
+      </div>
+
+      <button type="submit">Update Card</button>
+    <% end %>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  <div class="col-md-4">
+    <% if current_user.premium? %>
+    <h3>Downgrade to Standard</h3>
+    <%= link_to 'Downgrade Account', subscription_path, class: 'btn btn-danger',
+        data: {confirm: 'Downgrading your account will end your subscription, and
+          make all your private wikis public.  Are you sure?'}, method: :delete %>
+    <% end %>
+    <h3>Cancel my account</h3>
+    <p>Unhappy?
+      <%= button_to "Cancel my account", registration_path(resource_name),
+      data: { confirm: "Are you sure?" }, method: :delete %>
+    </p>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
 
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-<h3>upgrade/downgrade</h3>
+
 
 <h3>Cancel my account</h3>
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
