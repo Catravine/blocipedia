@@ -1,8 +1,7 @@
 <h1>Subscribe!</h1>
 
 
-
-<form action="/subscription" method="POST" id="payment-form">
+<%= form_tag subscription_path, id: "payment-form" do %>
   <span class="payment-errors"></span>
 
   <div class="form-row">
@@ -29,4 +28,4 @@
   </div>
 
   <button type="submit">Submit Payment</button>
-</form>
+<% end %>
