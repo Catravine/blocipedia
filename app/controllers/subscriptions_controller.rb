@@ -40,7 +40,7 @@ class SubscriptionsController < ApplicationController
     customer = Stripe::Customer.retrieve(current_user.stripe_id)
     customer.subscriptions.retrieve(current_user.stripe_subscription_id).delete
     current_user.update(stripe_subscription_id: nil)
-    current_user.standard!
+    current_user.downgrade!
     redirect_to root_path, notice: "Your subscription has been canceled."
   end
 
