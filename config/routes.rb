@@ -2,11 +2,14 @@ Rails.application.routes.draw do
 
   get 'users/show'
 
-  resources :wikis
+  resources :wikis 
 
   devise_for :users
   match 'users/:id' => 'users#show', via: :get
   resources :user, only: [:show]
+  resources :users do
+    resources :collaborators, only: [:create, :destroy]
+  end
 
   # Stripe payment SubscriptionsController
   resource :subscription

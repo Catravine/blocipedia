@@ -3,17 +3,12 @@ class WikisController < ApplicationController
   skip_before_filter :autheticate_user!, only: [:index, :show]
 
   def index
-    #@wikis = Wiki.visible_to(current_user)
     @wikis = policy_scope(Wiki)
   end
 
   def show
     @wiki = Wiki.find(params[:id])
     authorize @wiki
-    # unless @wiki.public? || current_user.premium? || current_user.admin?
-    #   flash[:alert] = "You must be a premium user to view private wikis."
-    #   redirect_to wikis_path
-    # end
   end
 
   def new

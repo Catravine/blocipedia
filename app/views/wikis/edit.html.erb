@@ -1,3 +1,16 @@
 <h1>Edit a Wiki</h1>
 
 <%= render partial: 'form', locals: { wiki: @wiki } %>
+
+<% if current_user.premium? && @wiki.user == current_user && !@wiki.public? %>
+  <hr/>
+  <div class="collaborators">
+    <h3>Add/Remove Collaborators:</h3>
+    <p>
+      <% User.where.not(role: 2).each do |user| %>
+        <%= render partial: 'collaborators/collaborator',
+          locals: { user: user, wiki: @wiki } unless user == @wiki.user %>
+      <% end %>
+    </p>
+  </div>
+<% end %>

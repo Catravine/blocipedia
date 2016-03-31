@@ -26,17 +26,4 @@ RSpec.describe Wiki, type: :model do
       expect(my_wiki.public?).to eq(true)
     end
   end
-
-  describe "scopes" do
-
-    describe "visible_to(user)" do
-      it "returns all wikis if user if premium" do
-        expect(Wiki.visible_to(premium_user)).to eq(Wiki.all)
-      end
-
-      it "returns only public wikis for standard users" do
-        expect(Wiki.visible_to(my_user)).to  eq([my_wiki])
-      end
-    end
-  end
 end

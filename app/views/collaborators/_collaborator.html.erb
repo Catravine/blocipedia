@@ -1,0 +1,12 @@
+<div>
+  <% collaborator = Collaborator.where(user: user, wiki: @wiki).first %>
+  <% if Collaborator.where(user: user, wiki: @wiki).empty? %>
+    <%= link_to [user, Collaborator.new], class: 'btn btn-default', method: :post do %>
+      <i class="glyphicon glyphicon-ok"> </i>&nbsp; Add <%= user.name %>
+    <% end %>
+  <% else %>
+    <%= link_to [user, collaborator], class: 'btn btn-warning', method: :delete do %>
+      <i class="glyphicon glyphicon-remove"> </i>&nbsp; Remove <%= user.name %>
+    <% end %>
+  <% end %>
+</div>

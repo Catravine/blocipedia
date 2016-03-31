@@ -83,7 +83,7 @@ RSpec.describe WikisController, type: :controller do
         get :show, {id: private_wiki.id}
         expect(response).to redirect_to(wikis_path)
       end
-      
+
       it "returns http success" do
         get :show, id: my_wiki.id
         expect(response).to have_http_status(:success)
@@ -180,21 +180,6 @@ RSpec.describe WikisController, type: :controller do
       it "redirects to wiki index" do
         delete :destroy, {id: my_wiki.id}
         expect(response).to redirect_to wikis_path
-      end
-    end
-  end
-
-  context "premium or admin users" do
-    before(:each) do
-      request.env["HTTP_REFERER"] = "where_i_came_from"
-      @request.env["devise.mapping"] = Devise.mappings[:user]
-      sign_in premium_user
-    end
-
-    describe "GET #index" do
-      it "assigns Topic.all to topic" do
-        get :index
-        expect(assigns(:wikis)).to eq ([my_wiki, private_wiki])
       end
     end
   end
