@@ -7,9 +7,9 @@
   <div class="collaborators">
     <h3>Add/Remove Collaborators:</h3>
     <p>
-      <% User.where.not(role: 2).each do |user| %>
+      <% @users.each do |user| %>
         <%= render partial: 'collaborators/collaborator',
-          locals: { user: user, wiki: @wiki } unless user == @wiki.user %>
+          locals: { user: user, wiki: @wiki } %>
       <% end %>
     </p>
   </div>

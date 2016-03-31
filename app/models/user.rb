@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   has_many :wikis
   has_many :collaborators, dependent: :destroy
+  has_many :wiki_collabortions, through: :collaborators, source: :wiki
 
   enum role: [:standard, :premium, :admin]
 

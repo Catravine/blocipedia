@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get 'users/show'
 
-  resources :wikis 
+  resources :wikis
 
   devise_for :users
   match 'users/:id' => 'users#show', via: :get
@@ -14,10 +14,17 @@ Rails.application.routes.draw do
   # Stripe payment SubscriptionsController
   resource :subscription
   resource :card
+
   get 'downgrade_account' => 'subscription#downgrade_account'
   post 'stripe_checkout' => 'subscriptions#stripe_checkout'
 
+  # Root path(s), welcome & about
   get 'about' => 'welcome#about'
+
+  authenticated :user do
+    root 'wikis#index', as: :authenticated_user
+  end
+
   root 'welcome#index'
 
 end
