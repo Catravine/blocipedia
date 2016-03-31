@@ -9,7 +9,7 @@
     </ul>
   </div>
   <div class="col-md-4">
-    <% if current_user.premium? %><div><% else %><div class="inactive"><% end %>
+    <% if !(current_user.standard?) %><div><% else %><div class="inactive"><% end %>
       <h3>Private Wikis</h3>
       <ul>
         <% Wiki.where(user: @user, public: false).each do |wiki| %>
