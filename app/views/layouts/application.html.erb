@@ -5,7 +5,7 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'https://js.stripe.com/v2/', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-  <%= tag :meta, name: "stripe-key", content: ENV['stripe_test_publishable_key'] %>
+  <%= tag :meta, name: "stripe-key", content: ENV['stripe_live_publishable_key'] %>
 </head>
 <body>
 

@@ -52,24 +52,24 @@
       <div class="form-row">
         <label>
           <span>Card Number</span>
-          <input value="4242 4242 4242 4242" type="text" size="20" data-stripe="number"/>
+          <input type="text" size="20" data-stripe="number"/>
         </label>
       </div>
 
       <div class="form-row">
         <label>
           <span>CVC</span>
-          <input value="123" type="text" size="4" data-stripe="cvc"/>
+          <input type="text" size="4" data-stripe="cvc"/>
         </label>
       </div>
 
       <div class="form-row">
         <label>
           <span>Expiration (MM/YYYY)</span>
-          <input value="08" type="text" size="2" data-stripe="exp-month"/>
+          <input type="text" size="2" data-stripe="exp-month"/>
         </label>
         <span> / </span>
-        <input value="2019" type="text" size="4" data-stripe="exp-year"/>
+        <input type="text" size="4" data-stripe="exp-year"/>
       </div>
 
       <button type="submit">Update Card</button>
@@ -82,18 +82,12 @@
     <%= link_to 'Downgrade Account', subscription_path, class: 'btn btn-danger',
         data: {confirm: 'Downgrading your account will end your subscription, and
           make all your private wikis public.  Are you sure?'}, method: :delete %>
-    <% end %>
+    <% else %>
     <h3>Cancel my account</h3>
     <p>Unhappy?
       <%= button_to "Cancel my account", registration_path(resource_name),
       data: { confirm: "Are you sure?" }, method: :delete %>
     </p>
+    <% end %>
   </div>
 </div>
-
-
-
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
