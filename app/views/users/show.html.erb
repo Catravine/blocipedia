@@ -4,7 +4,7 @@
     <h3>Public Wikis</h3>
     <ul>
       <% Wiki.where(user: @user, public: true).each do |wiki| %>
-        <li><%= link_to wiki.title, wiki_path(wiki.id) %></li>
+        <li><%= link_to wiki.title, wiki_path(wiki) %></li>
       <% end %>
     </ul>
   </div>
@@ -13,7 +13,7 @@
       <h3>Private Wikis</h3>
       <ul>
         <% Wiki.where(user: @user, public: false).each do |wiki| %>
-          <li><%= link_to wiki.title, wiki_path(wiki.id) %></li>
+          <li><%= link_to wiki.title, wiki_path(wiki) %></li>
         <% end %>
         <% if current_user.standard? %><li>upgrade required</li><% end %>
       </ul>
@@ -23,7 +23,7 @@
         <h3>Private Collaborations</h3>
         <ul>
           <% Collaborator.where(user: @user).each do |collab| %>
-            <li><%= link_to Wiki.where(id: collab.wiki_id).first.title, "/wikis/#{collab.wiki_id}" %></li>
+            <li><%= link_to Wiki.where(id: collab.wiki).first.title, wiki_path(collab.wiki) %></li>
           <% end %>
         </ul>
       </div>

@@ -12,6 +12,8 @@ group :development do
   gem 'sqlite3'
   gem 'quiet_assets'
   gem 'pry-rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :development, :test do
@@ -45,3 +47,5 @@ gem 'figaro', '1.0'
 gem 'faker'
 # Redcarpet to allow and parse markdown syntax
 gem 'redcarpet'
+# Friendly ID to make title slugged urls
+gem 'friendly_id', '~> 5.1'

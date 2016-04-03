@@ -53,6 +53,9 @@ wikis = Wiki.all
 Wiki.all.each { |wiki| wiki.update(public: false) if (wiki.user.premium? && rand(2) == 1) }
 private_wikis = Wiki.where(public: false).all
 
+# Add some private wiki collaborators
+private_wikis.each { |wiki| Collaborator.create(wiki: wiki, user: users.sample) }
+
 # Results
 puts "Seed Finished..."
 puts "#{User.count} total users created"

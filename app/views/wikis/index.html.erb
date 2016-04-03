@@ -4,7 +4,7 @@
   <div class="col-md-8">
     <ul class="all-wikis">
       <% @wikis.each do |wiki| %>
-        <li><%= link_to wiki.title, wiki_path(wiki.id) %></li>
+        <li><%= link_to wiki.title, wiki_path(wiki) %></li>
       <% end %>
     </ul>
   </div>

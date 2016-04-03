@@ -30,7 +30,7 @@
           </small>
         </p>
       </div>
-      <% if current_user.premium? && (@wiki.user == current_user || params[:action] == 'new') %>
+      <% if !(current_user.standard?) && (@wiki.user == current_user || params[:action] == 'new') %>
         <div class="form-group">
           <%= f.label :public, class: 'checkbox' do %>
             <%= f.check_box :public %> Public wiki

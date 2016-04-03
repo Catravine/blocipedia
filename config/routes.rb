@@ -5,8 +5,7 @@ Rails.application.routes.draw do
   resources :wikis
 
   devise_for :users
-  match 'users/:id' => 'users#show', via: :get
-  resources :user, only: [:show]
+  match 'users/:id' => 'users#show', :as => :profile, via: :get
   resources :users do
     resources :collaborators, only: [:create, :destroy]
   end
