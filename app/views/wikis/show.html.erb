@@ -8,7 +8,7 @@
       <% if @wiki.user.admin? %>
         <span class='glyphicon glyphicon-cog' style="color: #c00;"></span>
       <% end %>
-      <%= @wiki.user.email %> |
+      <%= link_to @wiki.user.name, profile_path(@wiki.user.name.parameterize) %> |
       <% if @wiki.public %>Public<% else %>Private<% end %>
       <% if @wiki.user == current_user %> - Owner<% end %></h4>
       <% if !(Collaborator.where(wiki: @wiki).empty?) %>

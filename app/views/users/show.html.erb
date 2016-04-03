@@ -1,4 +1,9 @@
-<h1><%= @user.name %></h1>
+<h1><% if @user.premium? %>
+    <span class='glyphicon glyphicon-star' style="color: #fc0;"></span>
+  <% end %>
+  <% if @user.admin? %>
+    <span class='glyphicon glyphicon-cog' style="color: #c00;"></span>
+  <% end %><%= @user.name %></h1>
 <div class="row">
   <div class="col-md-4">
     <h3>Public Wikis</h3>
@@ -9,24 +14,26 @@
     </ul>
   </div>
   <div class="col-md-4">
-    <% if !(current_user.standard?) %><div><% else %><div class="inactive"><% end %>
-      <h3>Private Wikis</h3>
-      <ul>
-        <% Wiki.where(user: @user, public: false).each do |wiki| %>
-          <li><%= link_to wiki.title, wiki_path(wiki) %></li>
-        <% end %>
-        <% if current_user.standard? %><li>upgrade required</li><% end %>
-      </ul>
-    </div>
-    <% if !(Collaborator.where(user: @user).empty?) %>
-      <div>
-        <h3>Private Collaborations</h3>
+    <% if @user == current_user %>
+      <% if !(current_user.standard?) %><div><% else %><div class="inactive"><% end %>
+        <h3>Private Wikis</h3>
         <ul>
-          <% Collaborator.where(user: @user).each do |collab| %>
-            <li><%= link_to Wiki.where(id: collab.wiki).first.title, wiki_path(collab.wiki) %></li>
+          <% Wiki.where(user: @user, public: false).each do |wiki| %>
+            <li><%= link_to wiki.title, wiki_path(wiki) %></li>
           <% end %>
+          <% if current_user.standard? %><li>upgrade required</li><% end %>
         </ul>
       </div>
+      <% if !(Collaborator.where(user: @user).empty?) %>
+        <div>
+          <h3>Private Collaborations</h3>
+          <ul>
+            <% Collaborator.where(user: @user).each do |collab| %>
+              <li><%= link_to Wiki.where(id: collab.wiki).first.title, wiki_path(collab.wiki) %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
     <% end %>
   </div>
   <div class="col-md-4">
