@@ -1,10 +1,10 @@
-<div>
+<div id="collab-<%= user.id %>">
   <% if wiki.collaborating_users.include?(user) %>
-    <%= link_to user_collaborator_path(user_id: user.id, wiki_id: wiki.id), class: 'btn btn-warning', method: :delete do %>
+    <%= link_to user_collaborator_path(user_id: user.id, wiki_id: wiki.id), class: 'btn btn-warning', method: :delete, remote: true do %>
       <i class="glyphicon glyphicon-remove"> </i>&nbsp; Remove <%= user.name %>
     <% end %>
   <% else %>
-    <%= link_to user_collaborators_path(user_id: user.id, wiki_id: wiki.id), class: 'btn btn-default', method: :post do %>
+    <%= link_to user_collaborators_path(user_id: user.id, wiki_id: wiki.id), class: 'btn btn-default', method: :post, remote: true do %>
       <i class="glyphicon glyphicon-ok"> </i>&nbsp; Add <%= user.name %>
     <% end %>
   <% end %>
