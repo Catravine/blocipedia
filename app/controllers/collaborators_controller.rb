@@ -20,7 +20,7 @@ class CollaboratorsController < ApplicationController
     @wiki = Wiki.find(params[:wiki_id])
     @collaborator = Collaborator.find_by(user: @user, wiki: @wiki)
     if @collaborator.destroy
-      flash[:notice] = "Collaborator removed."
+      flash[:notice] = "Collaborator '#{@user.name}' removed."
     else
       flash[:alert] = "De-Collaboration failed."
     end

@@ -14,7 +14,7 @@
       <% if !(Collaborator.where(wiki: @wiki).empty?) %>
         <p><strong>Collaborators:</strong>
           <% Collaborator.where(wiki: @wiki).each do |collab| %>
-            <%= User.where(id: collab.user_id).pluck(:email) %>
+            <span class="collab-name"><%= link_to collab.user.name, profile_path(collab.user.name.parameterize) %></span>
           <% end %>
         </p>
       <% end %>

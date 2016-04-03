@@ -30,14 +30,16 @@
     <% end %>
   </div>
   <div class="col-md-4">
-    <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>
-    <% if current_user.standard? %>
-      <%= link_to 'Upgrade Account', new_subscription_path, class: 'btn btn-warning' %>
-    <% end %>
-    <% if current_user.premium? %>
-    <%= link_to 'Downgrade Account', subscription_path, class: 'btn btn-danger',
-        data: {confirm: 'Downgrading your account will end your subscription, and
-          make all your private wikis public.  Are you sure?'}, method: :delete %>
+    <% if @user == current_user %>
+      <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>
+      <% if current_user.standard? %>
+        <%= link_to 'Upgrade Account', new_subscription_path, class: 'btn btn-warning' %>
+      <% end %>
+      <% if current_user.premium? %>
+      <%= link_to 'Downgrade Account', subscription_path, class: 'btn btn-danger',
+          data: {confirm: 'Downgrading your account will end your subscription, and
+            make all your private wikis public.  Are you sure?'}, method: :delete %>
+      <% end %>
     <% end %>
   </div>
 </div>

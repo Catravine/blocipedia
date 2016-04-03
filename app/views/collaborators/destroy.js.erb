@@ -1,1 +1,1 @@
-$('#collab-<%= @user.id %>').html("deleted");
+$('#collab-<%= @user.id %>').html('<%= link_to user_collaborators_path(user_id: @user.id, wiki_id: @wiki.id), class: "btn btn-default", method: :post, remote: true do %><i class="glyphicon glyphicon-ok"> </i>&nbsp; Add <%= @user.name %><% end %>');
