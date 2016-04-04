@@ -19,7 +19,12 @@
         </p>
       <% end %>
       <hr/>
-      <%= markdown(@wiki.body) %>
+      <%= form_for @wiki do |f| %>
+        <div class="form-group" style="display: none;">
+          <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki body" %>
+        </div>
+      <% end %>
+      <div id="wiki-preview"></div>
   </div>
   <div class="col-md-4">
     <% if policy(@wiki).update? %>
