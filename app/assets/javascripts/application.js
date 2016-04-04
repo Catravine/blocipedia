@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
@@ -23,8 +24,7 @@ $(document).ready(function() {
   });
 
   var converter = new showdown.Converter();
-
-  $('#wiki_body').on('keyup', function() {
+  $('#wiki_body').on('keyup, mousedown', function() {
     // get the contents of the text field
     var markdown = $('#wiki_body').val();
     var html = converter.makeHtml(markdown);
