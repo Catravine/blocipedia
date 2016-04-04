@@ -24,14 +24,21 @@ $(document).ready(function() {
   });
 
   var converter = new showdown.Converter();
-  $('#wiki_body').on('keyup, mousedown', function() {
+
+  $('#wiki-preview').html(converter.makeHtml($('#wiki_body').val()));
+
+  $('code').each(function(i, block) {
+    hljs.highlightBlock(block);
+  });
+
+  $('#wiki_body').on('keyup', function() {
     // get the contents of the text field
     var markdown = $('#wiki_body').val();
     var html = converter.makeHtml(markdown);
     $('#wiki-preview').html(html);
-     $('code').each(function(i, block) {
-        hljs.highlightBlock(block);
-      });
+    $('code').each(function(i, block) {
+      hljs.highlightBlock(block);
+    });
 
   });
 });
