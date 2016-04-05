@@ -2,7 +2,7 @@
 
 <%= render partial: 'form', locals: { wiki: @wiki } %>
 
-<% if !(current_user.standard?) && @wiki.user == current_user && !@wiki.public? %>
+<% if current_user.admin? || (!(current_user.standard?) && @wiki.user == current_user && !@wiki.public?) %>
   <hr/>
   <div class="collaborators">
     <h3>Add/Remove Collaborators:</h3>
