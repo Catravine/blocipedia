@@ -13,3 +13,41 @@ Caroline Courtney</a>, &copy; 2016</p>
   lets users create their own wikis and share them
   publicly or privately with other collaborators.
 </p>
+
+<h3>User Authentication &amp; Authorization</h3>
+<p>
+  User authentication using <a href="https://github.com/plataformatec/devise">
+  Devise</a>, and the confirmable module enabled.  Use your email address to sign up,
+  and get a confirmation token emailed to you.
+  Authorization to handle who has what privilages,
+  with <a href="https://github.com/elabs/pundit">
+  Pundit</a>.
+</p>
+
+<h3>Markdown</h3>
+<p>
+  Blocipedia supports <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a>.
+  Previews and showing/rendering wikis with markdown is handled by
+  <a href="https://github.com/showdownjs/showdown">showdown.js</a>, which nicely
+  supports code with help from
+  <a href="https://highlightjs.org/">highlight.js</a>.
+</p>
+
+
+<h3>Upgrade Account</h3>
+<p>
+  There are 3 levels of user; standard,
+  <span class='glyphicon glyphicon-star' style="color: #fc0;"></span>&nbsp;premium,
+  and <span class='glyphicon glyphicon-cog' style="color: #c00;"></span>&nbsp;admin.
+  A subscription controller powered by <a href="https://stripe.com">Stripe</a>
+  provides a means to accept recurring subscription payments to become a premium user,
+  and have privilages like creating private wikis and assigning individual collaborators
+  to them if they wish.  Admins are all-powerful, well, administrators.  Which is to say
+  there is only one of them.. for now!
+</p>
+
+<p>
+  If you wish to test out upgrading your account, this version uses the test
+  api keys, and may be tried out using the Stripe's <a href="https://stripe.com/docs/testing">
+  test credit cards</a>.  Test it up!
+</p>

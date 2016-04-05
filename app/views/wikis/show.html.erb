@@ -20,9 +20,7 @@
       <% end %>
       <hr/>
       <%= form_for @wiki do |f| %>
-        <div class="form-group" style="display: none;">
-          <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki body" %>
-        </div>
+        <div class="form-group" style="display: none;"> <%= f.text_area :body %></div>
       <% end %>
       <div id="wiki-preview"></div>
   </div>
