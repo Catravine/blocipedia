@@ -17,6 +17,17 @@
 //= require bootstrap
 //= require_tree .
 
+// Blocmetrics event request
+var blocmetrics = {};
+blocmetrics.report = function(eventName) {
+  var event = {event: { name: eventName}};
+  var request = new XMLHttpRequest();
+  request.open("POST", "https://mighty-eyrie-26757.herokuapp.com/api/events", true);
+  request.setRequestHeader('Content-Type', 'application/json');
+  request.send(JSON.stringify(event));
+};
+
+// Showdown and Hightlight markdown/preview functions
 $(document).ready(function() {
 
  $('code').each(function(i, block) {
